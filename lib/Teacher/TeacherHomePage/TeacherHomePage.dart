@@ -1,4 +1,7 @@
 import 'package:ana/Const/Colors.dart';
+import 'package:ana/Screen/HomePage/TabButton/TabButtonScreen/Event/Event.dart';
+import 'package:ana/Screen/HomePage/TabButton/TabButtonScreen/Images/anaPhotos.dart';
+import 'package:ana/Screen/HomePage/TabButton/TabButtonScreen/Video/anaVideos.dart';
 import 'package:ana/Teacher/TeacherCommunication/teacherCommunicationScreen.dart';
 import 'package:ana/Teacher/TeacherInfoPage/teacherInfoPage.dart';
 import 'package:ana/Teacher/TeacherWidget/AnalyticsReportingWidget.dart';
@@ -102,7 +105,12 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
               child: Column(
                 children: [
                   CircleAvatar(
+                    backgroundColor: Colors.white,
                     radius: 40,
+                    child: Image.asset(
+                      'assets/logo.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   SizedBox(height: 20,),
                   Text(_teacherEmail, style: TextStyle(color: Colors.white),)
@@ -110,11 +118,36 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
               )
             ),
             ListTile(
-              leading: const Icon(Icons.person),
+              leading: const Icon(Icons.person, color: Colors.amberAccent,),
               title: const Text('Profile'),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> TeacherInfoPage( teacherNumber: _teacherNumber, teacherAddress: _teacherAddress, teacherEmail: _teacherEmail, Branch: _teacherCourseBranch, teacherDob: _teacherDob, Course: "", teacherName: _teacherName,)
                 ));
+                // Handle item 1 tap
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.image, color: AppColors.defaultColor,),
+              title: const Text('Images'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AnaPhoto()
+                ));
+                // Handle item 1 tap
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.play_circle, color: Colors.red,),
+              title: const Text('Videos'),
+              onTap: () {
+               Navigator.push(context, MaterialPageRoute(builder: (context)=> AnaVideo()));
+                // Handle item 1 tap
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.event, color: Colors.deepOrangeAccent,),
+              title: const Text('Events'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> EventScreen()));
                 // Handle item 1 tap
               },
             ),
