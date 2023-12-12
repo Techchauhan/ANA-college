@@ -1,9 +1,23 @@
+import 'package:ana/Screen/MessageingScreen/MessageFirstScreen.dart';
 import 'package:ana/Teacher/TeacherCommunication/teacherAnnouncementsTab.dart';
 import 'package:flutter/material.dart';
 
-class CommunicationScreen extends StatelessWidget {
+class CommunicationScreen extends StatefulWidget {
+  final String name;
+  final String email;
+  final String password;
+  final String phoneNumber;
+  final String userType;
+
+  const CommunicationScreen({super.key, required this.name, required this.email, required this.password, required this.phoneNumber, required this.userType});
+  @override
+  State<CommunicationScreen> createState() => _CommunicationScreenState();
+}
+
+class _CommunicationScreenState extends State<CommunicationScreen> {
   @override
   Widget build(BuildContext context) {
+
     return DefaultTabController(
       length: 2, // Number of tabs (Announcements and Messaging)
       child: Scaffold(
@@ -20,7 +34,7 @@ class CommunicationScreen extends StatelessWidget {
 
           children: [
             AnnouncementsTab(),
-            MessagingTab(),
+            MessageFirstScreen(name: widget.name, email: widget.email, password: widget.password, phoneNumber: widget.phoneNumber, rollNo: '', userType: '',),
           ],
         ),
       ),

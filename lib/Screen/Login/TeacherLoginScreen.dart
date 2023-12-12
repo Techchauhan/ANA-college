@@ -144,6 +144,7 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
         prefs.setString('teacherNumber', data['teacherNumber'].toString());
         prefs.setString('teacherDob', data['teacherDob']);
         prefs.setString('teacherAddress', data['teacherAddress']);
+        prefs.setString('teacherPassword', data['teacherPassword']);
         // Navigate to the next screen or perform desired action
 
         Navigator.pushReplacement(

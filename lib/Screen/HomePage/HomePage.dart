@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   String _rollNo = '';
   String _phoneNumber = '';
   String _password = '';
+  String _userType = '';
   String _dob = '';
   String _courseBranch = ''; // Variable to store the course and branch
   String _address = '';
@@ -65,6 +66,7 @@ class _HomePageState extends State<HomePage> {
       String course = prefs.getString('course') ?? 'Empty';
       String branch = prefs.getString('branch') ?? 'Empty';
       _address = prefs.getString('address') ?? 'Empty';
+      _userType = prefs.getString('userType') ?? '';
 
       _courseBranch = '$branch - $course';
     });
@@ -284,6 +286,7 @@ class _HomePageState extends State<HomePage> {
                         password: _password,
                         phoneNumber: _phoneNumber,
                         rollNo: _rollNo,
+                        userType: _userType,
                       ),
                     ),
                   );

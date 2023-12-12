@@ -10,7 +10,6 @@ import 'package:ana/Teacher/TeacherWidget/ShedualCalendarWidget.dart';
 import 'package:ana/Teacher/TeacherWidget/StudentPerformanceWidget.dart';
 import 'package:ana/Teacher/TeacherWidget/TaskManagementWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -30,6 +29,9 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
   String _teacherDob = '';
   String _teacherCourseBranch = '';
   String _teacherAddress = '';
+  String _teacherPassword = '';
+  String _userType = '';
+
 
   @override
   void initState() {
@@ -48,8 +50,10 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
       String teacherCourse = prefs.getString('teacherCourse') ?? 'Empty';
       String teacherBranch = prefs.getString('teacherBranch') ?? 'Empty';
       _teacherAddress = prefs.getString('teacherAddress') ?? 'Empty';
-
       _teacherCourseBranch = '$teacherBranch - $teacherCourse';
+
+      _teacherPassword = prefs.getString('teacherPassword') ?? 'Empty';
+      _userType = prefs.getString('userType') ?? 'Empty';
     });
 
 
@@ -59,13 +63,13 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
+        preferredSize: const Size.fromHeight(100.0),
         child: AppBar(
           flexibleSpace: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
               elevation: 4,
-              margin: EdgeInsets.only(bottom: 16.0, left: 40),
+              margin: const EdgeInsets.only(bottom: 16.0, left: 40),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -74,15 +78,15 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(
+                    const Icon(
                       Icons.person,
                       size: 40,
                       color: Colors.blue,
                     ),
-                    SizedBox(width: 16.0),
+                    const SizedBox(width: 16.0),
                     Text(
                       "Welcome: $_teacherName",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -99,7 +103,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.defaultColor,
               ),
               child: Column(
@@ -112,8 +116,8 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  Text(_teacherEmail, style: TextStyle(color: Colors.white),)
+                  const SizedBox(height: 20,),
+                  Text(_teacherEmail, style: const TextStyle(color: Colors.white),)
                 ],
               )
             ),
@@ -152,7 +156,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
+              leading: const Icon(Icons.logout),
               title: const Text('Logo Out'),
               onTap: () {
                 // Handle item 2 tap
@@ -203,19 +207,17 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
       ),
      floatingActionButton: CircleAvatar(
        child: IconButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>CommunicationScreen()));
-       }, icon: Icon(Icons.message_outlined),),
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>CommunicationScreen(name: _teacherName, email: _teacherEmail, password: _teacherPassword, phoneNumber: _teacherNumber, userType: _userType,)));
+       }, icon: const Icon(Icons.message_outlined),),
      ),
     );
   }
-
-
 
   // Dashboard Overview Widget
   Widget _buildDashboardOverview() {
     return Card(
       elevation: 4,
-      margin: EdgeInsets.only(bottom: 16.0),
+      margin: const EdgeInsets.only(bottom: 16.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -224,14 +226,14 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            const Text(
               'Dashboard Overview',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 12.0),
+            const SizedBox(height: 12.0),
             _buildDashboardItem('Courses Taught', '5'), // Replace '5' with dynamic data
             _buildDashboardItem('Total Students', '150'), // Replace '150' with dynamic data
             _buildDashboardItem('Pending Tasks', '3'), // Replace '3' with dynamic data
@@ -252,15 +254,15 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
         children: <Widget>[
           Text(
             title + ':',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Text(
             value,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),
@@ -286,7 +288,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
 
     return Card(
       elevation: 4,
-      margin: EdgeInsets.only(bottom: 16.0),
+      margin: const EdgeInsets.only(bottom: 16.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -295,24 +297,24 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            const Text(
               'Courses Overview',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 12.0),
+            const SizedBox(height: 12.0),
             // Display each course as a list tile
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: courses.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   title: Text(
                     courses[index]['courseName'],
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,7 +355,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
 
     return Card(
       elevation: 4,
-      margin: EdgeInsets.only(bottom: 16.0),
+      margin: const EdgeInsets.only(bottom: 16.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -362,24 +364,24 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            const Text(
               'Announcements and Notifications',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 12.0),
+            const SizedBox(height: 12.0),
             // Display each announcement as a list tile
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: announcements.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   title: Text(
                     announcements[index]['title'],
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(announcements[index]['description']),
                   // You can add onTap functionality for each announcement tile

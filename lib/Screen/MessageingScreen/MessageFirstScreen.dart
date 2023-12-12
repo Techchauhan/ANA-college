@@ -6,20 +6,23 @@ import 'package:ana/Screen/MessageingScreen/MessageMainScreen.dart';
 import 'package:ana/Widget/AnimatedButton.dart';
 
 class MessageFirstScreen extends StatefulWidget {
-  MessageFirstScreen({
+  const MessageFirstScreen({
     Key? key,
     required this.name,
     required this.email,
     required this.password,
     required this.phoneNumber,
     required this.rollNo,
+    required this.userType,
+
   }) : super(key: key);
 
-  String name;
-  String email;
-  String password;
-  String phoneNumber;
-  String rollNo;
+  final String name;
+  final  String email;
+  final String password;
+  final  String phoneNumber;
+  final String rollNo;
+  final String userType;
 
   @override
   State<MessageFirstScreen> createState() => _MessageFirstScreenState();
@@ -96,6 +99,7 @@ class _MessageFirstScreenState extends State<MessageFirstScreen> {
             'isActive': true,
             'token': 'token', // You can add your custom fields here
             'lastActive': DateTime.now(),
+            'userType': widget.userType,
           });
         }
 
