@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "197352192450",
+    "project_id": "ana-college",
+    "storage_bucket": "ana-college.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197352192450:android:ef4bf2f536f0a523aebe5b",
+        "android_client_info": {
+          "package_name": "com.example.ana"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTR9NdDhJo8Q16KFflAFTZRH4o4uzKSg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
