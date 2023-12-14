@@ -15,6 +15,7 @@ class StudentLoginScreen extends StatefulWidget {
 class _StudentLoginScreenState extends State<StudentLoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +54,24 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
               // Password Text Field
               TextFormField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
+                obscureText: _obscureText,
+                decoration:   InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock),
+                   suffixIcon: IconButton(
+                     icon: Icon(
+                       _obscureText
+                           ? Icons.visibility
+                           : Icons.visibility_off,
+                     ),
+                     onPressed: () {
+                       // Update the password visibility
+                       setState(() {
+                         _obscureText = !_obscureText;
+                       });
+                     },
+                   ),
                 ),
               ),
               const SizedBox(height: 12.0),

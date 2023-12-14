@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:ana/Const/Colors.dart';
 import 'package:ana/Screen/Login/StudentLoginScreen.dart';
-import 'package:ana/Screen/Route/NavigatoScreen.dart';
 import 'package:ana/Teacher/TeacherTab/TeacherMainTab.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,7 +15,8 @@ class TeacherLoginScreen extends StatefulWidget {
 class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isLoading = false; // Added to manage loading state
+  bool _isLoading = false;
+  bool _obscureText = true; // Added to manage loading state
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,11 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
       appBar: AppBar(
         title: const Text("Teacher Login"),
       ),
-      body: _isLoading ? const Center (
+      body: _isLoading
+          ? const Center(
         child: CircularProgressIndicator(),
-      ) : SingleChildScrollView(
+      )
+          : SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -35,10 +37,20 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
             children: <Widget>[
               const SizedBox(height: 20),
 
-              Align(alignment: Alignment.topRight, child:   IconButton(onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>StudentLoginScreen()));
-              }, icon: const Icon(Icons.person)),),
-
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StudentLoginScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.person),
+                ),
+              ),
 
               // Logo
               Image.asset(
@@ -61,11 +73,24 @@ class _TeacherLoginScreenState extends State<TeacherLoginScreen> {
               // Password Text Field
               TextFormField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
+                obscureText: _obscureText, // Use the obscureText property
+                decoration: InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      // Update the password visibility
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: 12.0),
