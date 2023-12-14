@@ -13,9 +13,10 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String _name = ''; // Variable to store the user's name
   String _email = '';
-  String _RollNo = '';
+  String _rollNo = '';
   String _phoneNumber = '';
   String _dob = '';
+  String _userType = '';
   String _courseBranch = ''; // Variable to store the course and branch
   String _address = '';
   String _academicStatus = '';
@@ -32,8 +33,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _name =
           prefs.getString('name') ?? ''; // Default to empty string if not found
       _email = prefs.getString('email') ?? '';
-      _RollNo = prefs.getString('userId') ?? '';
+      _rollNo = prefs.getString('userId') ?? '';
       _phoneNumber = prefs.getString('PhoneNumber') ?? '';
+      _userType = prefs.getString('userType') ?? '';
       _dob = prefs.getString('dob') ?? '';
       _academicStatus = prefs.getString('academicStatus') ?? '';
       String course = prefs.getString('course') ?? 'Empty';
@@ -128,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: TabBarView(
                       children: [
                         // Content of Tab 1
-                        const StudentPost(),
+                          StudentPost(userType: _userType, userId: _rollNo,),
                         // Content of Tab 2
                         const StudentResults(),
                         // Content of Tab 3
@@ -137,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           email: _email,
                           phoneNumber: _phoneNumber,
                           dob: _dob,
-                          rollNo: _RollNo,
+                          rollNo: _rollNo,
                           academicStatus: _academicStatus,
                         ),
                       ],

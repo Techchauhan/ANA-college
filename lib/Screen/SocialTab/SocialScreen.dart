@@ -1,4 +1,6 @@
+import 'package:ana/Screen/ProfileTab/StudentPost/StrudentPost.dart';
 import 'package:ana/Screen/SocialTab/CreatePost.dart';
+import 'package:ana/Screen/SocialTab/UpdatePost.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -106,15 +108,29 @@ class _SocialScreenState extends State<SocialScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '${posts[index]['user_type']} - ${posts[index]['user_first_name']} ${posts[index]['user_last_name']}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: posts[index]['user_type'].toString().toLowerCase() == 'student'
-                                  ? Colors.blue
-                                  : Colors.green,
-                            ),
+                          Row(
+                            children: [
+                              Icon(
+                                posts[index]['user_type'].toString().toLowerCase() == 'student'
+                                    ? Icons.school // Use an appropriate icon for student
+                                    : Icons.work, // Use an appropriate icon for other types
+                                color: posts[index]['user_type'].toString().toLowerCase() == 'student'
+                                    ? Colors.blue
+                                    : Colors.green,
+                              ),
+                              SizedBox(width: 8.0), // Add some spacing between the icon and text
+                              Text(
+                                '${posts[index]['user_first_name']} ${posts[index]['user_last_name']} - ${capitalize(posts[index]['user_type'])}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: posts[index]['user_type'].toString().toLowerCase() == 'student'
+                                      ? Colors.blue
+                                      : Colors.green,
+                                ),
+                              ),
+                            ],
                           ),
+
                           const SizedBox(height: 8.0),
                           Text(
                             posts[index]['post_content'],
@@ -200,6 +216,15 @@ class _SocialScreenState extends State<SocialScreen> {
             },
           ),
           SpeedDialChild(
+            child: const Icon(Icons.update),
+            backgroundColor: Colors.green,
+            label: 'Update Post',
+            labelStyle: const TextStyle(fontSize: 16.0),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  StudentPost(userType: userType, userId: userId)));
+            },
+          ),
+          SpeedDialChild(
             child: const Icon(Icons.favorite),
             backgroundColor: Colors.red,
             label: 'Favorite',
@@ -213,4 +238,12 @@ class _SocialScreenState extends State<SocialScreen> {
       ),
     );
   }
+
+  String capitalize(String input) {
+    if (input == null || input.isEmpty) {
+      return '';
+    }
+    return input[0].toUpperCase() + input.substring(1);
+  }
+
 }

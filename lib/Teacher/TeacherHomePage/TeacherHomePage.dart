@@ -182,25 +182,6 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
 
 
               ScheduleCalendarWidget(),
-
-
-
-              StudentPerformanceWidget(),
-
-
-
-              CommunicationToolsWidget(),
-
-              TaskManagementWidget(),
-
-
-              // Resources and Materials
-              // Replace this with your own resources/materials UI
-
-              // Profile Information
-              // Replace this with your own profile information UI
-
-              AnalyticsReportingWidget()
             ],
           ),
         ),
